@@ -1,20 +1,86 @@
-# How to Scrape Hacker News Who is Hiring Posts in Node.js
+<div align="center">
 
-Extract structured job postings from Hacker News monthly "Who is Hiring?" threads using the [HN Who is Hiring Scraper](https://apify.com/devanshlive/hn-hiring-scraper) actor on Apify -- no browser automation or proxies required.
+# HN Hiring Scraper: Job Posts as Structured JSON
 
-## What this example does
+[![Apify Actor](https://img.shields.io/badge/Apify-Actor-ff6b35?style=for-the-badge&logo=apify&logoColor=white)](https://apify.com/devanshlive/hn-hiring-scraper)
+[![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Made with Love](https://img.shields.io/badge/Made%20with-Love-e31b23?style=for-the-badge)](https://github.com/getascraper)
+[![Open Source](https://img.shields.io/badge/Open%20Source-Yes-blue?style=for-the-badge)](https://github.com/getascraper/how-to-scrape-hn-hiring)
 
-- Calls the HN Who is Hiring Scraper actor via the Apify client
-- Passes optional post URLs or auto-discovers the latest threads
-- Waits for the run to complete
-- Fetches results from the actor's dataset
-- Prints each job posting to the console
+**Extract structured job postings from Hacker News "Who is Hiring?" threads with salary, remote status, and tech stack in seconds.**
 
-## Prerequisites
+Built for job seekers, recruiting teams, and developers who need structured hiring data from Hacker News without manual parsing.
 
-- [Node.js](https://nodejs.org/) v18 or higher
-- An [Apify account](https://console.apify.com/sign-up) (free tier available)
-- An [Apify API token](https://console.apify.com/settings/integrations)
+[Quick Start](#quick-start) · [API Reference](#api-reference) · [Pricing](#pricing) · [Support](#support)
+
+![Apify Actor Hero](docs/hn-hiring-actor-hero.png)
+
+</div>
+
+---
+
+## Quick Start
+
+```javascript
+import { ApifyClient } from 'apify-client';
+import 'dotenv/config';
+
+const client = new ApifyClient({ token: process.env.APIFY_TOKEN });
+
+const run = await client.actor('devanshlive/hn-hiring-scraper').call({
+  monthsBack: 1,
+  maxJobsPerMonth: 10,
+  includeReplies: false,
+});
+
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
+```
+
+**Output:**
+```json
+{
+  "commentId": 123456789,
+  "hnUser": "hiring_manager",
+  "postedAt": 1704067200,
+  "postedAtIso": "2024-01-01T00:00:00Z",
+  "rawText": "We're hiring senior engineers...",
+  "cleanText": "We're hiring senior engineers...",
+  "company": "TechCorp",
+  "role": "Senior Engineer",
+  "location": "San Francisco, CA",
+  "remoteStatus": "REMOTE",
+  "employmentType": "Full-time",
+  "salary": "$150k - $200k",
+  "technologies": ["React", "Node.js", "PostgreSQL"],
+  "emails": ["jobs@techcorp.com"],
+  "urls": ["https://techcorp.com/jobs"],
+  "isTopLevel": true,
+  "parentId": null,
+  "replyCount": 5,
+  "hnUrl": "https://news.ycombinator.com/item?id=123456789"
+}
+```
+
+---
+
+## Features
+
+- **Auto-discovers latest threads** no need to find URLs manually
+- **Structured parsing** extracts company, role, salary, remote status, and tech stack
+- **Multiple months** in one run with configurable lookback
+- **Reply filtering** include or exclude replies and nested comments
+- **Tech stack extraction** automatically identifies mentioned technologies
+
+---
+
+## What this actor does
+
+This Actor extracts job postings from Hacker News monthly "Who is Hiring?" threads. It auto-discovers the latest threads, parses structured data from comments, and returns clean JSON.
+
+It supports configurable lookback periods, job limits per month, and reply filtering. Each posting includes company, role, location, salary, remote status, and tech stack.
+
+---
 
 ## Installation
 
@@ -22,49 +88,30 @@ Extract structured job postings from Hacker News monthly "Who is Hiring?" thread
 npm install
 ```
 
-## Environment setup
+Copy the environment file and add your Apify API token:
 
 ```bash
 cp .env.example .env
 ```
 
-Open `.env` and replace `your_apify_token_here` with your actual Apify API token.
+Open `.env` and replace `your_apify_token_here` with your actual Apify API token. Get one free at [console.apify.com](https://console.apify.com/settings/integrations).
 
-## Usage
+---
 
-```bash
-npm start
-```
+## Input
 
-## Code example
+| Field | Type | Description | Default |
+|-------|------|-------------|---------|
+| `monthsBack` | integer | How many months to look back | 1 |
+| `maxJobsPerMonth` | integer | Max jobs per month | 100 |
+| `includeReplies` | boolean | Include reply comments | false |
+| `startUrls` | array | Optional specific thread URLs | none |
 
-```javascript
-import { ApifyClient } from 'apify-client';
-import 'dotenv/config';
+---
 
-const client = new ApifyClient({
-  token: process.env.APIFY_TOKEN,
-});
+## Output
 
-const input = {
-  monthsBack: 1,
-  maxJobsPerMonth: 10,
-  includeReplies: false,
-};
-
-const run = await client.actor('devanshlive/hn-hiring-scraper').call(input);
-
-console.log('Results from dataset');
-console.log(`Check your data here: https://console.apify.com/storage/datasets/${run.defaultDatasetId}`);
-const { items } = await client.dataset(run.defaultDatasetId).listItems();
-items.forEach((item) => {
-  console.dir(item);
-});
-```
-
-## Example output
-
-See `sample-output.json` for a full example. Each job posting includes:
+Each job is a structured JSON record. Download as JSON, CSV, Excel, or HTML.
 
 | Field | Description |
 |-------|-------------|
@@ -88,7 +135,19 @@ See `sample-output.json` for a full example. Each job posting includes:
 | `replyCount` | Number of replies to this job post |
 | `hnUrl` | Direct link to the comment on HN |
 
-## Use cases
+See `sample-output.json` for a full example.
+
+---
+
+## Pricing
+
+**$0.02 per job.**
+
+A run of 100 jobs typically completes in 1 to 2 minutes. Pay only for what you extract.
+
+---
+
+## Use Cases
 
 - **Job search automation:** Build personalized job alerts from HN hiring threads
 - **Tech hiring trends:** Analyze which technologies and companies are hiring most
@@ -96,15 +155,34 @@ See `sample-output.json` for a full example. Each job posting includes:
 - **Recruiting intelligence:** Monitor competitor hiring patterns and tech stack preferences
 - **Salary benchmarking:** Extract salary ranges for role and location comparison
 
-## Try the actor on Apify
+---
 
-[Open the HN Who is Hiring Scraper on Apify](https://apify.com/devanshlive/hn-hiring-scraper)
+## FAQ
 
-## Related resources
+**How does auto-discovery work?**
+The Actor automatically finds the latest "Who is Hiring?" threads on Hacker News. No manual URL collection needed.
+
+**Can I search specific months?**
+Yes. Use `monthsBack` to control how many months to look back. Set to 1 for just the latest month.
+
+**What tech stacks are detected?**
+The Actor automatically detects technologies mentioned in job posts: programming languages, frameworks, databases, cloud platforms, and tools.
+
+---
+
+## Support
+
+Open an issue in the [Apify Console](https://console.apify.com/actors/devanshlive~hn-hiring-scraper/issues).
+
+---
+
+## Related Resources
 
 - [Hacker News API documentation](https://github.com/HackerNews/API)
 - [Apify Client for JavaScript](https://docs.apify.com/api/client/js/)
 
-## License
+---
 
-MIT
+**Ready to start extracting?**
+
+[Open the HN Hiring Scraper on Apify](https://apify.com/devanshlive/hn-hiring-scraper)
