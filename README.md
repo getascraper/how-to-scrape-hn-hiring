@@ -1,13 +1,13 @@
 <div align="center">
 
-# HN Hiring Scraper: Job Posts as Structured JSON
+# HN Hiring Scraper | Tech Job Data Extraction API | Apify Actor
 
 [![Apify Actor](https://img.shields.io/badge/Apify-Actor-ff6b35?style=for-the-badge&logo=apify&logoColor=white)](https://apify.com/devanshlive/hn-hiring-scraper)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![Made with Love](https://img.shields.io/badge/Made%20with-Love-e31b23?style=for-the-badge)](https://github.com/getascraper)
 [![Open Source](https://img.shields.io/badge/Open%20Source-Yes-blue?style=for-the-badge)](https://github.com/getascraper/how-to-scrape-hn-hiring)
 
-**Extract structured job postings from Hacker News "Who is Hiring?" threads with salary, remote status, and tech stack in seconds.**
+**Hacker News hiring scraper and tech job data extraction API. Extract job posts, companies, and tech roles from HN Who is Hiring with this Apify actor. Free tier included.**
 
 Built for job seekers, recruiting teams, and developers who need structured hiring data from Hacker News without manual parsing.
 
