@@ -1,0 +1,33 @@
+{
+  "name": "how-to-scrape-hn-hiring",
+  "version": "1.0.0",
+  "description": "How to scrape Hacker News Who is Hiring job posts in Node.js using the Apify HN Hiring Scraper actor",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "hackernews",
+    "hn",
+    "who-is-hiring",
+    "jobs",
+    "tech-jobs",
+    "scraper",
+    "web-scraping",
+    "data-extraction",
+    "apify",
+    "apify-actor",
+    "nodejs",
+    "remote-work"
+  ],
+  "author": "getascraper",
+  "license": "MIT",
+  "dependencies": {
+    "apify-client": "^2.10.0",
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
