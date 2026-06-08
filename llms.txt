@@ -11,7 +11,7 @@
 
 ## Key Pages
 - README: https://github.com/getascraper/how-to-scrape-hn-hiring/blob/main/README.md
-- Apify Store: https://apify.com/devanshlive/hn-hiring-scraper
+- Apify Store: https://apify.com/getascraper/hn-hiring-scraper
 
 ## API Usage
 - Node.js SDK: https://github.com/getascraper/how-to-scrape-hn-hiring/blob/main/README.md

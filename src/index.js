@@ -11,7 +11,7 @@ const input = {
   includeReplies: false,
 };
 
-const run = await client.actor('devanshlive/hn-hiring-scraper').call(input);
+const run = await client.actor('getascraper/hn-hiring-scraper').call(input);
 
 console.log('Results from dataset');
 console.log(`Check your data here: https://console.apify.com/storage/datasets/${run.defaultDatasetId}`);

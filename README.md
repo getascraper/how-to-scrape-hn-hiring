@@ -2,7 +2,7 @@
 
 # HN Hiring Scraper | Tech Job Data Extraction API | Apify Actor
 
-[![Apify Actor](https://img.shields.io/badge/Apify-Actor-ff6b35?style=for-the-badge&logo=apify&logoColor=white)](https://apify.com/devanshlive/hn-hiring-scraper)
+[![Apify Actor](https://img.shields.io/badge/Apify-Actor-ff6b35?style=for-the-badge&logo=apify&logoColor=white)](https://apify.com/getascraper/hn-hiring-scraper)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![Made with Love](https://img.shields.io/badge/Made%20with-Love-e31b23?style=for-the-badge)](https://github.com/getascraper)
 [![Open Source](https://img.shields.io/badge/Open%20Source-Yes-blue?style=for-the-badge)](https://github.com/getascraper/how-to-scrape-hn-hiring)
@@ -27,7 +27,7 @@ import 'dotenv/config';
 
 const client = new ApifyClient({ token: process.env.APIFY_TOKEN });
 
-const run = await client.actor('devanshlive/hn-hiring-scraper').call({
+const run = await client.actor('getascraper/hn-hiring-scraper').call({
   monthsBack: 1,
   maxJobsPerMonth: 10,
   includeReplies: false,
@@ -172,7 +172,7 @@ The Actor automatically detects technologies mentioned in job posts: programming
 
 ## Support
 
-Open an issue in the [Apify Console](https://console.apify.com/actors/devanshlive~hn-hiring-scraper/issues).
+Open an issue in the [Apify Console](https://console.apify.com/actors/getascraper~hn-hiring-scraper/issues).
 
 ---
 
@@ -185,4 +185,4 @@ Open an issue in the [Apify Console](https://console.apify.com/actors/devanshliv
 
 **Ready to start extracting?**
 
-[Open the HN Hiring Scraper on Apify](https://apify.com/devanshlive/hn-hiring-scraper)
+[Open the HN Hiring Scraper on Apify](https://apify.com/getascraper/hn-hiring-scraper)
